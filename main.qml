@@ -3,392 +3,238 @@ import QtQuick.Controls 2.1
 import QtQuick.Controls.Material 2.12
 import QtQuick.Layouts 1.3
 
+
 ApplicationWindow {
     id: mainWindow
     width: 640
     height: 480
     visible: true
     title: qsTr("Hello World")
-    /*
-    Material.theme: Material.Dark
-    Material.accent: Material.Purple
-    */
-    /* 01 - button / label / menu*/
-    /*
-    Label{
-        id: labelcenter
-        anchors.centerIn: parent
-        text: "my Text is here"
-        font.pointSize: 28
-    }
-    Button{
-        id: button01
-        text: "abrir menu"
-        onClicked: {
-            menu01.open()
 
-        }
+    /* 13 - stackview*/
+
+    /*
+    StackView {
+        id: stack
+        initialItem: mainView
+        anchors.fill: parent
     }
 
-    Menu {
-        id: menu01
-        title: "Menu"
-        y: button01.height
+    Component {
+        id: mainView
 
-        MenuItem {
-            text: "Item 1"
-            onClicked: {
-                menu01.visible = false
-                labelcenter.text = "item 1"
+        Row {
+            spacing: 10
+
+            Button {
+                text: "Push"
+                onClicked: stack.push(mainView)
             }
-        }
-        MenuItem {
-            text: "Item 2"
-            onClicked: {
-                menu01.visible = false
-                labelcenter.text = "item 2"
+            Button {
+                text: "Pop"
+                enabled: stack.depth > 1
+                onClicked: stack.pop()
+
+            }
+            Text {
+                text: stack.depth
             }
         }
     }
     */
 
-    /* 02 - ListView /Component model: ListModel{}*/
+    /* 14 - progress bar*/
     /*
+    ColumnLayout {
+        id: columnLayout
+        anchors.fill: parent
+        spacing: 10
+        ProgressBar {
+            id: progressBar
+            anchors.fill: parent
+            value: slider.value
+            from: slider.from
+            to: slider.to
+        }
+
+        Slider {
+            Layout.fillWidth: true
+            id: slider
+            from: 0
+            to: 100
+            stepSize: 1
+            value: 50
+        }
+        Text {
+            Layout.fillWidth: true
+            text: progressBar.value
+        }
+    }
+    */
+
+    /* 15 - spinbox*/
+
+    /*
+    ColumnLayout {
+        id: columnLayout
+        anchors.fill: parent
+
+        ProgressBar {
+            id: progressBar
+            value: spinBox.value
+            from: spinBox.from
+            to: spinBox.to
+            Layout.fillWidth: true
+
+            SpinBox {
+                id: spinBox
+                from: 0
+                stepSize: 10
+                to: 100
+                height: 50
+                width: 50
+                Layout.fillWidth: true
 
 
-    Component.onCompleted: {
-        var colores = ["red", "blue", "white", "yellow"]
-        for(var ix = 0 ; ix<3;ix++){
-        myList.model.append({valorTexto: "hola "+ix, colorFondo: colores[ix]})
+
+            }
+        }
+    }
+    */
+
+    /* 16 - combobox*/
+    /*
+    ColumnLayout{
+        anchors.fill: parent
+
+        Text{
+            text: "ComboBox"
+            Layout.fillWidth: true
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+
+        }
+        ComboBox{
+            id: comboBox
+            Layout.fillWidth: true
+
+            model: ListModel {
+            ListElement {
+                text: "Item 1"
+            }
+            ListElement {
+                text: "Item 2"
+            }
+            ListElement {
+                text: "Item 3"
+            }
+
+        }
+
+
     }
 }
+*/
 
-
-ListView{
-
+/* 17 - switch*/
+/*
+ColumnLayout{
     anchors.fill: parent
-    id: myList
-    model: ListModel{}
-    spacing: 5
+    Repeater {
+        model: ListModel {
+        ListElement {
+            myText: "Item 1"
+        }
+        ListElement {
+            myText: "Item 2"
+        }
+        ListElement {
+            myText: "Item 3"
+        }
 
-    delegate: Rectangle{
+    }
 
-    color: colorFondo
-    border.color: "black"
-    border.width: 5
-    width: mainWindow.width/2
-    height: 30
+    Switch {
+        text: myText
+    }
+
+
+}
+Text {
+    text: myText
+}
+}
+
+*/
+
+/* 18 - dial */
+/*
+ColumnLayout{
+    anchors.fill: parent
 
     Text{
-
-
-        anchors{
-            verticalCenter: parent.verticalCenter
-            horizontalCenter: parent.horizontalCenter
-        }
-        text: valorTexto
-        color: "black"
+        text: "Dial"
     }
 
-}
+    ProgressBar{
+        id: progressBar
+        Layout.fillWidth: true
+        from: myDial.from
+        to: myDial.to
+        value: myDial.value
+    }
+    Dial{
+        id: myDial
+        from: 0
+        to: 100
+        stepSize: 1
+        value: 50
+        Layout.fillWidth: true
+        Layout.fillHeight: true
+    }
 
 }
 */
 
-
-/* 03 grid*/
-/*
-Component.onCompleted: {
-
-    myGrid.model.append({
-    myColor: "orange"
-});
-myGrid.model.append({
-myColor: "blue"
-});
-myGrid.model.append({
-myColor: "red"
-});
-
-}
-
-GridView{
-
-    id: myGrid
-    anchors{
-        top: parent.top
-        bottom: parent.bottom
-        right: parent.right
-        left: parent.left
-        topMargin: 20
-        leftMargin: 20
-
-    }
-    cellWidth: width/3
-    cellHeight: height/3
-    model: ListModel{}
-    delegate: Rectangle{
-    width: myGrid.cellWidth * 0.9
-    height: myGrid.cellHeight * 0.9
-    color: myColor
-}
-
-}
-*/
-//repeater example
-// 04 - repeater example
-
-
-/*
-Column{
-    id: myLayout
-
-    spacing: 5
-
-    /// repeat buttons example
-    Repeater{
-        id: myRepeater
-        anchors.fill: parent
-        model: 5
-        delegate: Button{
-        text: "Button"
-        onClicked: {
-
-            labelcenter.text = "Button"
-        }
-    }
-}
-
-
-}
-
-*/
-
-/* 04 - SwipeView example*/
-/*
-SwipeView {
-    id: view
-
-    currentIndex: 1
-    anchors.fill: parent
-
-    Item {
-        id: firstPage
-        Text {
-            text: "First Page"
-        }
-    }
-    Item {
-        id: secondPage
-        Text {
-            text: "Second Page"
-        }
-
-    }
-    Item {
-        id: thirdPage
-        Text {
-            text: "Third Page"
-        }
-    }
-}
-
-PageIndicator {
-    id: indicator
-
-    count: view.count
-    currentIndex: view.currentIndex
-
-    anchors.bottom: view.bottom
-    anchors.horizontalCenter: parent.horizontalCenter
-}
-*/
-
-/* 05 - tabbar example*/
-
-/*
-    TabBar {
-        id: bar
-        width: parent.width
-        TabButton {
-            text: qsTr("Home")
-        }
-        TabButton {
-            text: qsTr("Discover")
-        }
-        TabButton {
-            text: qsTr("Activity")
-        }
-    }
-
-    StackLayout {
-        width: parent.width
-        currentIndex: bar.currentIndex
-        Item {
-            id: homeTab
-            Text {
-                text: "Home"
-            }
-        }
-        Item {
-            id: discoverTab
-            Text {
-                text: "Discover"
-            }
-        }
-        Item {
-            id: activityTab
-            Text {
-                text: "Activity"
-            }
-        }
-    }
-    */
-
-    /*06 -  ToolBar */
-
-
+/* 19 - TextArea */
     /*
-    header: ToolBar {
-           RowLayout {
-               anchors.fill: parent
-               ToolButton {
-                   text: qsTr("⋮")
-                   onClicked: {
-                               menu.open()
-                   }
-
-
-               }
-               Label {
-                   text: "Title"
-                   elide: Label.ElideRight
-                   horizontalAlignment: Qt.AlignHCenter
-                   verticalAlignment: Qt.AlignVCenter
-                   Layout.fillWidth: true
-               }
-               ToolButton {
-
-                   text:  qsTr("‹")
-                   onClicked:
-                   {
-                                    stack.pop()
-                   }
-
-               }
-           }
-       }
-
-    StackView{
-    id:stack
+ColumnLayout{
     anchors.fill: parent
-    }
-       Menu {
-           id: menu
 
-           MenuItem {
-               text: "Menu Item 1"
-               onClicked: {
+    ScrollView{
+        Layout.fillHeight: true
+        Layout.fillWidth: true
 
-
-                   stack.push(myComponent);
-               }
-           }
-              MenuItem {
-                text: "Menu Item 2"
-                onClicked: {
+        TextArea {
+            style:TextAreaStyle  {
+                textColor: "#333"
+                selectionColor: "steelblue"
+                selectedTextColor: "#eee"
+                backgroundColor: "#eee"
+            }
+        }
 
 
-                        stack.push(myComponent2);
-                }
-              }
-              MenuItem {
-                text: "Menu Item 3"
-                onClicked: {
-                                    stack.push(myComponent3);
-                }
-              }
-              Component {
-                id: myComponent
-                Rectangle {
-                    Text {
-                        id: name
-                        text: qsTr("text 1")
-                    }
-                    color: "red"
-
-                }
-              }
-              Component {
-                id: myComponent2
-                Rectangle {
-                    Text {
-                        id: name
-                        text: qsTr("text 2")
-                    }
-                    color: "blue"
-
-                }
-              }
-                Component {
-                    id: myComponent3
-                    Rectangle {
-                        Text {
-                            id: name
-                            text: qsTr("text 3")
-                        }
-                        color: "green"
-
-                    }
-                }
-
-}
-*/
-
-/* 07 - canvas example*/
-/*
-Canvas {
-    id: mycanvas
-    width: 100
-    height: 200
-    onPaint: {
-        var ctx = getContext("2d");
-        ctx.fillStyle = Qt.rgba(1, 0, 0, 1);
-        ctx.fillRect(0, 0, width, height);
     }
 }
 */
 
+    /*20 - alias*/
 
-/* 08 -  Q_PROPERTY example*/
-ListView{
+MainPage{
+id:mainpage01
 anchors.fill: parent
-model: people
-delegate: Rectangle{
-
-
-width: parent.width
-
-height: 30
-RowLayout{
-width: parent.width
-Text {
-Layout.fillWidth: true
-text: name
-}
-Text {
-Layout.fillWidth: true
-text: age
-}
 Button{
 
-    Layout.fillWidth: true
-    text: "ok"
+text: "Color"
+anchors.centerIn: parent
+onClicked: {
+
+    mainpage01.section1.rect.color ="orange"
+    mainpage01.section2.rect.color ="pink"
+
+}
 }
 }
 
-}
-
-
-}
 }

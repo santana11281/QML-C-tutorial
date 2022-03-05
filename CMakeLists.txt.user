@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 6.0.2, 2022-03-02T03:40:47. -->
+<!-- Written by QtCreator 6.0.2, 2022-03-05T00:59:42. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -299,6 +299,7 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">apptutorial02</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">CMakeProjectManager.CMakeRunConfiguration.apptutorial02</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">apptutorial02</value>
+    <value type="QString" key="RunConfiguration.Arguments">-style Basic</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>

@@ -2,11 +2,16 @@
 #include <QQmlApplicationEngine>
 #include <QLocale>
 #include <QTranslator>
-#include "people.h"
 #include <QQmlContext>
+#include "someclass.h"
+
+
+
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
+
+
 
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
@@ -18,18 +23,10 @@ int main(int argc, char *argv[])
         }
     }
 
-QObjectList allPeople;
-
-int value = 0;
-allPeople.append(new People (value));
-
+ //   SomeClass testClass;
 
 
     QQmlApplicationEngine engine;
-    QQmlContext *context = new QQmlContext(engine.rootContext());
-    context->setContextProperty("allPeople",QVariant::fromValue(allPeople));
- 
-
 
     const QUrl url(u"qrc:/tutorial02/main.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
@@ -38,6 +35,9 @@ allPeople.append(new People (value));
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
     engine.load(url);
+
+//    QQmlContext *rootContext = engine.rootContext();
+      //  rootContext -> setContextProperty("classA",&testClass);
 
     return app.exec();
 }

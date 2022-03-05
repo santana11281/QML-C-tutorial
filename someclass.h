@@ -11,6 +11,9 @@ public:
 
 signals:
 
+public slots:
+    void callMe();
+
 };
 
 #endif // SOMECLASS_H
