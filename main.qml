@@ -58,225 +58,235 @@ ApplicationWindow {
         clip: true
 
         model: TableModel {
-            TableModelColumn { display: "name" }
-            TableModelColumn { display: "color" }
-
-            rows: [
-                {
-                    "name": "cat",
-                    "color": "black"
-                },
-                {
-                    "name": "dog",
-                    "color": "brown"
-                },
-                {
-                    "name": "bird",
-                    "color": "white"
-                }
-            ]
+        TableModelColumn {
+            display: "name"
+        }
+        TableModelColumn {
+            display: "color"
         }
 
-        delegate: Rectangle {
-            implicitWidth: 100
-            implicitHeight: 50
-            border.width: 1
+        rows: [
+        {
+            "name": "cat",
+            "color": "black"
+        },
+    {
+        "name": "dog",
+        "color": "brown"
+    },
+{
+    "name": "bird",
+    "color": "white"
+}
+]
+}
 
-            Text {
-                text: display
-                anchors.centerIn: parent
-            }
-        }
-    }
-    */
+delegate: Rectangle {
+implicitWidth: 100
+implicitHeight: 50
+border.width: 1
 
-    /* 29 - tabview */
+Text {
+    text: display
+    anchors.centerIn: parent
+}
+}
+}
+*/
+
+/* 29 - tabview */
 /*
-    TabBar {
-        id: bar
-        width: parent.width
-        TabButton {
-            text: qsTr("Home")
-        }
-        TabButton {
-            text: qsTr("Discover")
-        }
-        TabButton {
-            text: qsTr("Activity")
-        }
+TabBar {
+    id: bar
+    width: parent.width
+    TabButton {
+        text: qsTr("Home")
     }
+    TabButton {
+        text: qsTr("Discover")
+    }
+    TabButton {
+        text: qsTr("Activity")
+    }
+}
 
-    StackLayout {
-        width: parent.width
-        currentIndex: bar.currentIndex
-        Item {
-            id: homeTab
-         Rectangle{
+StackLayout {
+    width: parent.width
+    currentIndex: bar.currentIndex
+    Item {
+        id: homeTab
+        Rectangle{
 
-             anchors.centerIn: parent
-             width: parent.width
-             height: parent.height
-             Text {
-                 id: name
-                 text: qsTr("homeTab")
-             }
-         }
-        }
-        Item {
-
-            id: discoverTab
-            Rectangle{
-
-                anchors.centerIn: parent
-                width: parent.width
-                height: parent.height
-                Text {
-                    id: name02
-                    text: qsTr("discoverTab")
-                }
-            }
-        }
-        Item {
-            id: activityTab
-            Rectangle{
-
-                anchors.centerIn: parent
-                width: parent.width
-                height: parent.height
-                Text {
-                    id: name03
-                    text: qsTr("activityTab")
-                }
+            anchors.centerIn: parent
+            width: parent.width
+            height: parent.height
+            Text {
+                id: name
+                text: qsTr("homeTab")
             }
         }
     }
+    Item {
+
+        id: discoverTab
+        Rectangle{
+
+            anchors.centerIn: parent
+            width: parent.width
+            height: parent.height
+            Text {
+                id: name02
+                text: qsTr("discoverTab")
+            }
+        }
+    }
+    Item {
+        id: activityTab
+        Rectangle{
+
+            anchors.centerIn: parent
+            width: parent.width
+            height: parent.height
+            Text {
+                id: name03
+                text: qsTr("activityTab")
+            }
+        }
+    }
+}
 */
 /*30 - treeview or listview*/
-    Item {
-        width: 200
-        height: 300
+Item {
+    width: 200
+    height: 300
 
-        ListView {
-            anchors.fill: parent
-            model: nestedModel
-            delegate: categoryDelegate
-        }
+    ListView {
+        anchors.fill: parent
+        model: nestedModel
+        delegate: categoryDelegate
+    }
 
-        ListModel {
-            id: nestedModel
-            ListElement {
-                categoryName: "Veggies"
-                collapsed: true
+    ListModel {
+        id: nestedModel
+        ListElement {
+            categoryName: "Veggies"
+            collapsed: true
 
-                // A ListElement can't contain child elements, but it can contain
-                // a list of elements. A list of ListElements can be used as a model
-                // just like any other model type.
-                subItems: [
-                    ListElement { itemName: "Tomato" },
+            // A ListElement can't contain child elements, but it can contain
+            // a list of elements. A list of ListElements can be used as a model
+            // just like any other model type.
+            subItems: [
+                ListElement { itemName: "Tomato" },
                     ListElement { itemName: "Cucumber" },
-                    ListElement { itemName: "Onion" },
-                    ListElement { itemName: "Brains" }
-                ]
-            }
-
-            ListElement {
-                categoryName: "Fruits"
-                collapsed: true
-                subItems: [
-                    ListElement { itemName: "Orange" },
-                    ListElement { itemName: "Apple" },
-                    ListElement { itemName: "Pear" },
-                    ListElement { itemName: "Lemon" }
-                ]
-            }
-
-            ListElement {
-                categoryName: "Cars"
-                collapsed: true
-                subItems: [
-                    ListElement { itemName: "Nissan" },
-                    ListElement { itemName: "Toyota" },
-                    ListElement { itemName: "Chevy" },
-                    ListElement { itemName: "Audi" }
-                ]
-            }
-        }
-
-        Component {
-            id: categoryDelegate
-            Column {
-                width: 200
-
-                Rectangle {
-                    id: categoryItem
-                    border.color: "black"
-                    border.width: 5
-                    color: "white"
-                    height: 50
-                    width: 200
-
-                    Text {
-                        anchors.verticalCenter: parent.verticalCenter
-                        x: 15
-                        font.pixelSize: 24
-                        text: categoryName
+                        ListElement { itemName: "Onion" },
+                            ListElement {
+                                itemName: "Brains"
+                            }
+                        ]
                     }
 
-                    Rectangle {
-                        color: "red"
-                        width: 30
-                        height: 30
-                        anchors.right: parent.right
-                        anchors.rightMargin: 15
-                        anchors.verticalCenter: parent.verticalCenter
+                    ListElement {
+                        categoryName: "Fruits"
+                        collapsed: true
+                        subItems: [
+                            ListElement { itemName: "Orange" },
+                                ListElement { itemName: "Apple" },
+                                    ListElement { itemName: "Pear" },
+                                        ListElement {
+                                            itemName: "Lemon"
+                                        }
+                                    ]
+                                }
 
-                        MouseArea {
-                            anchors.fill: parent
+                                ListElement {
+                                    categoryName: "Cars"
+                                    collapsed: true
+                                    subItems: [
+                                        ListElement { itemName: "Nissan" },
+                                            ListElement { itemName: "Toyota" },
+                                                ListElement { itemName: "Chevy" },
+                                                    ListElement {
+                                                        itemName: "Audi"
+                                                    }
+                                                ]
+                                            }
+                                        }
 
-                            // Toggle the 'collapsed' property
-                            onClicked: nestedModel.setProperty(index, "collapsed", !collapsed)
-                        }
-                    }
-                }
+                                        Component {
+                                            id: categoryDelegate
+                                            Column {
+                                                width: 200
 
-                Loader {
-                    id: subItemLoader
+                                                Rectangle {
+                                                    id: categoryItem
+                                                    border.color: "black"
+                                                    border.width: 5
+                                                    color: "white"
+                                                    height: 50
+                                                    width: 200
 
-                    // This is a workaround for a bug/feature in the Loader element. If sourceComponent is set to null
-                    // the Loader element retains the same height it had when sourceComponent was set. Setting visible
-                    // to false makes the parent Column treat it as if it's height was 0.
-                    visible: !collapsed
-                    property variant subItemModel : subItems
-                    sourceComponent: collapsed ? null : subItemColumnDelegate
-                    onStatusChanged: if (status == Loader.Ready) item.model = subItemModel
-                }
-            }
+                                                    Text {
+                                                        anchors.verticalCenter: parent.verticalCenter
+                                                        x: 15
+                                                        font.pixelSize: 24
+                                                        text: categoryName
+                                                    }
 
-        }
+                                                    Rectangle {
+                                                        color: "red"
+                                                        width: 30
+                                                        height: 30
+                                                        anchors.right: parent.right
+                                                        anchors.rightMargin: 15
+                                                        anchors.verticalCenter: parent.verticalCenter
 
-        Component {
-            id: subItemColumnDelegate
-            Column {
-                property alias model : subItemRepeater.model
-                width: 200
-                Repeater {
-                    id: subItemRepeater
-                    delegate: Rectangle {
-                        color: "#cccccc"
-                        height: 40
-                        width: 200
-                        border.color: "black"
-                        border.width: 2
+                                                        MouseArea {
+                                                            anchors.fill: parent
 
-                        Text {
-                            anchors.verticalCenter: parent.verticalCenter
-                            x: 30
-                            font.pixelSize: 18
-                            text: itemName
-                        }
-                    }
-                }
-            }
-        }
-    }
-    }
+                                                            // Toggle the 'collapsed' property
+                                                            onClicked: nestedModel.setProperty(index, "collapsed", !collapsed)
+                                                        }
+                                                    }
+                                                }
+
+                                                Loader {
+                                                    id: subItemLoader
+
+                                                    // This is a workaround for a bug/feature in the Loader element. If sourceComponent is set to null
+                                                    // the Loader element retains the same height it had when sourceComponent was set. Setting visible
+                                                    // to false makes the parent Column treat it as if it's height was 0.
+                                                    visible: !collapsed
+                                                    property variant subItemModel: subItems
+                                                    sourceComponent: collapsed ? null: subItemColumnDelegate
+                                                    onStatusChanged: if (status == Loader.Ready) item.model = subItemModel
+                                                }
+                                            }
+
+                                        }
+
+                                        Component {
+                                            id: subItemColumnDelegate
+                                            Column {
+                                                property alias model: subItemRepeater.model
+                                                width: 200
+                                                Repeater {
+                                                    id: subItemRepeater
+                                                    delegate: Rectangle {
+                                                    color: "#cccccc"
+                                                    height: 40
+                                                    width: 200
+                                                    border.color: "black"
+                                                    border.width: 2
+
+                                                    Text {
+                                                        anchors.verticalCenter: parent.verticalCenter
+                                                        x: 30
+                                                        font.pixelSize: 18
+                                                        text: itemName
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
