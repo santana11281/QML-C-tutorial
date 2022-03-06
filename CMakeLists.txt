@@ -15,10 +15,9 @@ qt_add_executable(apptutorial02
 qt_add_qml_module(apptutorial02
     URI tutorial02
     VERSION 1.0
-    QML_FILES main.qml 
-    QML_FILES MainPage.qml
-    QML_FILES Section1.qml
-    QML_FILES Section2.qml
+    QML_FILES main.qml
+    QML_FILES Page1.qml
+    QML_FILES Page2.qml
 )
 
 set_target_properties(apptutorial02 PROPERTIES
