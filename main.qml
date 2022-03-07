@@ -13,280 +13,133 @@ ApplicationWindow {
     visible: true
     title: qsTr("Hello World")
 
-    /* 27 - splitview*/
-
+    /*32 - animation*/
     /*
-    SplitView {
-        anchors.fill: parent
-        orientation: Qt.Horizontal
+    Component.onCompleted: {
+        animation01.start()
+        animation02.start()
 
-        Rectangle {
-            implicitWidth: 200
-            SplitView.maximumWidth: 400
-            color: "lightblue"
-            Label {
-                text: "View 1"
-                anchors.centerIn: parent
-            }
+    }
+
+    Rectangle {
+        id: rectangle
+        width: 55
+        height: 55
+        color: "red"
+        x: 0
+        y: 0
+
+    }
+
+    NumberAnimation {
+        id: animation01
+        target: rectangle
+        property: "x"
+        duration: 2000
+        easing.type: Easing.InOutQuad
+        from: 0
+        to: mainWindow.width
+    }
+
+    NumberAnimation {
+        id: animation02
+        target: rectangle
+        property: "y"
+        duration: 2000
+        easing.type: Easing.InOutQuad
+        from: 0
+        to: mainWindow.height
+
+    }
+
+    */
+
+    /* 33 - Dialog*/
+    /*
+    Dialog {
+        anchors.centerIn: parent
+        id: dialog
+        title: "Title"
+        standardButtons: Dialog.Ok | Dialog.Cancel
+
+        onAccepted: console.log("Ok clicked")
+        onRejected: console.log("Cancel clicked")
+    }
+
+    Button{
+        anchors.centerIn: parent
+        id: openDialog
+        text: "open dialog"
+        onClicked: {
+
+            dialog.open()
         }
-        Rectangle {
-            id: centerItem
-            SplitView.minimumWidth: 50
-            SplitView.fillWidth: true
-            color: "lightgray"
-            Label {
-                text: "View 2"
-                anchors.centerIn: parent
-            }
-        }
-        Rectangle {
-            implicitWidth: 200
-            color: "lightgreen"
-            Label {
-                text: "View 3"
-                anchors.centerIn: parent
-            }
-        }
+
     }
     */
-    /* 28 - tableview*/
-    /*
-    TableView {
-        anchors.fill: parent
-        columnSpacing: 1
-        rowSpacing: 1
-        clip: true
 
-        model: TableModel {
-        TableModelColumn {
-            display: "name"
-        }
-        TableModelColumn {
-            display: "color"
-        }
+    /* 39 - filedialog*/
 
-        rows: [
-        {
-            "name": "cat",
-            "color": "black"
-        },
-    {
-        "name": "dog",
-        "color": "brown"
-    },
-{
-    "name": "bird",
-    "color": "white"
-}
-]
-}
-
-delegate: Rectangle {
-implicitWidth: 100
-implicitHeight: 50
-border.width: 1
-
-Text {
-    text: display
-    anchors.centerIn: parent
-}
-}
-}
-*/
-
-/* 29 - tabview */
 /*
-TabBar {
-    id: bar
-    width: parent.width
-    TabButton {
-        text: qsTr("Home")
+    FileDialog {
+        id: fileDialog
+        title: "Please choose a file"
+        folder: shortcuts.home
+        onAccepted: {
+            console.log("You chose: " + fileDialog.fileUrls)
+            Qt.quit()
+        }
+        onRejected: {
+            console.log("Canceled")
+            Qt.quit()
+        }
+        Component.onCompleted: visible = true
     }
-    TabButton {
-        text: qsTr("Discover")
+
+    Button {
+        anchors.centerIn: parent
+        text: "Open file dialog"
+        onClicked: fileDialog.open()
+
     }
-    TabButton {
-        text: qsTr("Activity")
+    */
+     /* 40- tumbler*/
+    /*
+    Tumbler {
+        model: 5
+        // ...
     }
+    */
+    /* 41 QML - QtCharts*/
+/*
+    ChartView {
+        width: 400
+        height: 300
+        theme: ChartView.ChartThemeBrownSand
+        antialiasing: true
+
+        PieSeries {
+            id: pieSeries
+            PieSlice { label: "eaten"; value: 94.9 }
+            PieSlice { label: "not yet eaten"; value: 5.1 }
+        }
+    }*/
+    /* 41 - GroupBox*/
+    /*
+    GroupBox {
+        label: CheckBox {
+            id: checkBox
+            checked: true
+            text: qsTr("Synchronize")
+        }
+
+        ColumnLayout {
+            anchors.fill: parent
+            enabled: checkBox.checked
+            CheckBox { text: qsTr("E-mail") }
+            CheckBox { text: qsTr("Calendar") }
+            CheckBox { text: qsTr("Contacts") }
+        }
+    }*/
+
 }
-
-StackLayout {
-    width: parent.width
-    currentIndex: bar.currentIndex
-    Item {
-        id: homeTab
-        Rectangle{
-
-            anchors.centerIn: parent
-            width: parent.width
-            height: parent.height
-            Text {
-                id: name
-                text: qsTr("homeTab")
-            }
-        }
-    }
-    Item {
-
-        id: discoverTab
-        Rectangle{
-
-            anchors.centerIn: parent
-            width: parent.width
-            height: parent.height
-            Text {
-                id: name02
-                text: qsTr("discoverTab")
-            }
-        }
-    }
-    Item {
-        id: activityTab
-        Rectangle{
-
-            anchors.centerIn: parent
-            width: parent.width
-            height: parent.height
-            Text {
-                id: name03
-                text: qsTr("activityTab")
-            }
-        }
-    }
-}
-*/
-/*30 - treeview or listview*/
-Item {
-    width: 200
-    height: 300
-
-    ListView {
-        anchors.fill: parent
-        model: nestedModel
-        delegate: categoryDelegate
-    }
-
-    ListModel {
-        id: nestedModel
-        ListElement {
-            categoryName: "Veggies"
-            collapsed: true
-
-            // A ListElement can't contain child elements, but it can contain
-            // a list of elements. A list of ListElements can be used as a model
-            // just like any other model type.
-            subItems: [
-                ListElement { itemName: "Tomato" },
-                    ListElement { itemName: "Cucumber" },
-                        ListElement { itemName: "Onion" },
-                            ListElement {
-                                itemName: "Brains"
-                            }
-                        ]
-                    }
-
-                    ListElement {
-                        categoryName: "Fruits"
-                        collapsed: true
-                        subItems: [
-                            ListElement { itemName: "Orange" },
-                                ListElement { itemName: "Apple" },
-                                    ListElement { itemName: "Pear" },
-                                        ListElement {
-                                            itemName: "Lemon"
-                                        }
-                                    ]
-                                }
-
-                                ListElement {
-                                    categoryName: "Cars"
-                                    collapsed: true
-                                    subItems: [
-                                        ListElement { itemName: "Nissan" },
-                                            ListElement { itemName: "Toyota" },
-                                                ListElement { itemName: "Chevy" },
-                                                    ListElement {
-                                                        itemName: "Audi"
-                                                    }
-                                                ]
-                                            }
-                                        }
-
-                                        Component {
-                                            id: categoryDelegate
-                                            Column {
-                                                width: 200
-
-                                                Rectangle {
-                                                    id: categoryItem
-                                                    border.color: "black"
-                                                    border.width: 5
-                                                    color: "white"
-                                                    height: 50
-                                                    width: 200
-
-                                                    Text {
-                                                        anchors.verticalCenter: parent.verticalCenter
-                                                        x: 15
-                                                        font.pixelSize: 24
-                                                        text: categoryName
-                                                    }
-
-                                                    Rectangle {
-                                                        color: "red"
-                                                        width: 30
-                                                        height: 30
-                                                        anchors.right: parent.right
-                                                        anchors.rightMargin: 15
-                                                        anchors.verticalCenter: parent.verticalCenter
-
-                                                        MouseArea {
-                                                            anchors.fill: parent
-
-                                                            // Toggle the 'collapsed' property
-                                                            onClicked: nestedModel.setProperty(index, "collapsed", !collapsed)
-                                                        }
-                                                    }
-                                                }
-
-                                                Loader {
-                                                    id: subItemLoader
-
-                                                    // This is a workaround for a bug/feature in the Loader element. If sourceComponent is set to null
-                                                    // the Loader element retains the same height it had when sourceComponent was set. Setting visible
-                                                    // to false makes the parent Column treat it as if it's height was 0.
-                                                    visible: !collapsed
-                                                    property variant subItemModel: subItems
-                                                    sourceComponent: collapsed ? null: subItemColumnDelegate
-                                                    onStatusChanged: if (status == Loader.Ready) item.model = subItemModel
-                                                }
-                                            }
-
-                                        }
-
-                                        Component {
-                                            id: subItemColumnDelegate
-                                            Column {
-                                                property alias model: subItemRepeater.model
-                                                width: 200
-                                                Repeater {
-                                                    id: subItemRepeater
-                                                    delegate: Rectangle {
-                                                    color: "#cccccc"
-                                                    height: 40
-                                                    width: 200
-                                                    border.color: "black"
-                                                    border.width: 2
-
-                                                    Text {
-                                                        anchors.verticalCenter: parent.verticalCenter
-                                                        x: 30
-                                                        font.pixelSize: 18
-                                                        text: itemName
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
